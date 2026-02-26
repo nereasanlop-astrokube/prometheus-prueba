@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/nereasanlop-astrokube/prometheus-prueba.git'
-    path: '.'  # apunta a la carpeta donde está values.yaml
+    path: 'kube-prometheus-stack'
     targetRevision: main
     helm:
       chart: kube-prometheus-stack
