@@ -1,0 +1,27 @@
+prometheus:
+  enabled: true
+  prometheusSpec:
+    replicas: 1
+  serviceAccount:
+    create: true
+    name: prometheus-sa
+  persistence:
+    enabled: true
+    storageClass: standard
+    size: 20Gi
+  service:
+    type: ClusterIP
+
+prometheusOperator:
+  enabled: true
+
+grafana:
+  enabled: true
+  persistence:
+    enabled: true
+    storageClassName: standard
+    size: 10Gi
+  service:
+    type: ClusterIP
+  adminUser: admin
+  adminPassword: admin
