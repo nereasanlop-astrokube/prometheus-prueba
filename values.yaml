@@ -1,8 +1,20 @@
-grafana:
-  adminUser: admin
-  adminPassword: admin
-  service:
-    type: ClusterIP
-prometheus:
-  service:
-    type: ClusterIP
+kube-prometheus-stack:
+  prometheus:
+    serviceAccount:
+      create: true
+      name: prometheus-sa
+    persistence:
+      enabled: true
+    service:
+      type: ClusterIP
+
+  grafana:
+    enabled: true
+    persistence:
+      enabled: true
+    serviceAccount:
+      create: true
+    service:
+      type: ClusterIP
+    adminUser: admin
+    adminPassword: admin
