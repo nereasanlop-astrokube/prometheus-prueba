@@ -6,19 +6,14 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
-    targetRevision: 45.0.0
+    repoURL: 'https://github.com/nereasanlop-astrokube/prometheus-prueba.git'
+    path: '.'  # apunta a la carpeta donde está values.yaml
+    targetRevision: main
     helm:
-      values: |
-        grafana:
-          adminUser: admin
-          adminPassword: admin
-          service:
-            type: ClusterIP
-        prometheus:
-          service:
-            type: ClusterIP
+      chart: kube-prometheus-stack
+      repoURL: 'https://prometheus-community.github.io/helm-charts'
+      valuesFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
