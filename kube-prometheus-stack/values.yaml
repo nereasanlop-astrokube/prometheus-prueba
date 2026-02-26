@@ -1,27 +1,47 @@
-kube-prometheus-stack:
-  prometheus:
+prometheus:
+  enabled: true
+  serviceAccount:
+    create: true
+    name: prometheus-sa
+  persistence:
     enabled: true
-    prometheusSpec:
-      serviceMonitorSelector: {}
-      serviceAccountName: prometheus-sa
-      storageSpec:
-        volumeClaimTemplate:
-          spec:
-            storageClassName: standard
-            accessModes: ["ReadWriteOnce"]
-            resources:
-              requests:
-                storage: 10Gi
-    service:
-      type: ClusterIP
+    storageClass: standard
+    size: 10Gi
+  service:
+    type: ClusterIP
+  prometheusSpec:
+    serviceMonitorSelector: {}
+    resources:
+      requests:
+        memory: 400Mi
+        cpu: 200m
+      limits:
+        memory: 1Gi
+        cpu: 500m
 
 grafana:
   enabled: true
   persistence:
     enabled: true
+    storageClassName: standard
+    size: 10Gi
   serviceAccount:
     create: true
   service:
     type: ClusterIP
   adminUser: admin
   adminPassword: admin
+
+kubeStateMetrics:
+  enabled: true
+  serviceAccount:
+    create: true
+  service:
+    type: ClusterIP
+
+nodeExporter:
+  enabled: true
+  serviceAccount:
+    create: true
+  service:
+    type: ClusterIP
