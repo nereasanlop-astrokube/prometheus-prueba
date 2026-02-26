@@ -1,4 +1,14 @@
 prometheus:
+  enabled: true
+  serviceAccount:
+    create: true
+    name: prometheus-sa
+  persistence:
+    enabled: true
+    storageClass: standard
+    size: 10Gi
+  service:
+    type: ClusterIP
   prometheusSpec:
     serviceMonitorSelector: {}
     serviceAccountName: prometheus-sa
@@ -10,15 +20,28 @@ prometheus:
           resources:
             requests:
               storage: 10Gi
+
 grafana:
   enabled: true
   persistence:
     enabled: true
+    storageClassName: standard
+    size: 10Gi
   service:
     type: ClusterIP
   adminUser: admin
   adminPassword: admin
+
 kubeStateMetrics:
   enabled: true
+  serviceAccount:
+    create: true
+  service:
+    type: ClusterIP
+
 nodeExporter:
   enabled: true
+  serviceAccount:
+    create: true
+  service:
+    type: ClusterIP
