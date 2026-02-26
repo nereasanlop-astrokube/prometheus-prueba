@@ -1,31 +1,28 @@
-annotations:
-  artifacthub.io/license: Apache-2.0
-  artifacthub.io/links: |
-    - name: Chart Source
-      url: https://github.com/prometheus-community/helm-charts
-    - name: Upstream Project
-      url: https://github.com/prometheus-operator/kube-prometheus
-  artifacthub.io/operator: "true"
 apiVersion: v2
-appVersion: v0.63.0
-dependencies:
-- condition: kubeStateMetrics.enabled
-  name: kube-state-metrics
-  repository: https://prometheus-community.github.io/helm-charts
-  version: 4.24.*
-- condition: nodeExporter.enabled
-  name: prometheus-node-exporter
-  repository: https://prometheus-community.github.io/helm-charts
-  version: 4.8.*
-- condition: grafana.enabled
-  name: grafana
-  repository: https://grafana.github.io/helm-charts
-  version: 6.50.*
-home: https://github.com/prometheus-operator/kube-prometheus
-kubeVersion: '>=1.16.0-0'
 name: kube-prometheus-stack
-sources:
-- https://github.com/prometheus-community/helm-charts
-- https://github.com/prometheus-operator/kube-prometheus
+description: A Helm chart for Kubernetes
+
+# A chart can be either an 'application' or a 'library' chart.
+#
+# Application charts are a collection of templates that can be packaged into versioned archives
+# to be deployed.
+#
+# Library charts provide useful utilities or functions for the chart developer. They're included as
+# a dependency of application charts to inject those utilities and functions into the rendering
+# pipeline. Library charts do not define any templates and therefore cannot be deployed.
 type: application
-version: 45.0.0
+
+# This is the chart version. This version number should be incremented each time you make changes
+# to the chart and its templates, including the app version.
+# Versions are expected to follow Semantic Versioning (https://semver.org/)
+version: 0.1.0
+
+# This is the version number of the application being deployed. This version number should be
+# incremented each time you make changes to the application. Versions are not expected to
+# follow Semantic Versioning. They should reflect the version the application is using.
+# It is recommended to use it with quotes.
+appVersion: "1.16.0"
+dependencies:
+  - name: kube-prometheus-stack
+    version: 75.4.0
+    repository: https://prometheus-community.github.io/helm-charts
