@@ -1,25 +1,40 @@
 prometheus:
   enabled: true
-  serviceAccount:
-    create: true
-    name: prometheus-sa
+  prometheusSpec:
+    serviceMonitorNamespaceSelector: {}
+    serviceMonitorSelector: {}
+    serviceMonitorSelectorNilUsesHelmValues: false
   persistence:
     enabled: true
     storageClass: standard
     size: 20Gi
   service:
     type: ClusterIP
-  prometheusSpec:
-    serviceMonitorSelectorNilUsesHelmValues: false
-    podMonitorSelectorNilUsesHelmValues: false
-    retention: 30d
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 20Gi
+  additionalServiceMonitors:
+    - name: "default-service-monitor"
+      selector:
+        matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: Exists
+      namespaceSelector:
+        any: true
+      endpoints:
+        - port: metrics
+          path: /metrics
+          interval: 30s
+          scheme: http
+  additionalPodMonitors:
+    - name: "default-pod-monitor"
+      selector:
+        matchLabels:
+          monitor.arcelormittal.digital/pod-monitor: "true"
+      namespaceSelector:
+        any: true
+      podMetricsEndpoints:
+        - port: metrics
+
+
+
 
 grafana:
   enabled: true
