@@ -12,6 +12,9 @@ prometheus:
   service:
     type: ClusterIP
 
+prometheusOperator:
+  enabled: true
+
 grafana:
   enabled: true
   persistence:
