@@ -31,17 +31,3 @@ grafana:
     type: ClusterIP
   adminUser: admin
   adminPassword: admin
-
-kubeStateMetrics:
-  enabled: true
-  serviceAccount:
-    create: true
-  service:
-    type: ClusterIP
-
-nodeExporter:
-  enabled: true
-  serviceAccount:
-    create: true
-  service:
-    type: ClusterIP
