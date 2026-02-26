@@ -1,5 +1,7 @@
 prometheus:
   enabled: true
+  prometheusSpec:
+    replicas: 1
   serviceAccount:
     create: true
     name: prometheus-sa
@@ -9,19 +11,6 @@ prometheus:
     size: 20Gi
   service:
     type: ClusterIP
-  prometheusSpec:
-    serviceMonitorSelectorNilUsesHelmValues: false
-    podMonitorSelectorNilUsesHelmValues: false
-    retention: 30d
-    storageSpec:
-      volumeClaimTemplate:
-        spec:
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 20Gi
-prometheusOperator:
-  enabled: true
 
 grafana:
   enabled: true
