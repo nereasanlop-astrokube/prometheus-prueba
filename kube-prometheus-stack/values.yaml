@@ -20,6 +20,8 @@ prometheus:
           resources:
             requests:
               storage: 20Gi
+prometheusOperator:
+  enabled: true
 
 grafana:
   enabled: true
