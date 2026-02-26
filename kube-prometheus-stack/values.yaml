@@ -1,12 +1,19 @@
-prometheus:
-  enabled: true
-  serviceAccount:
-    create: true
-    name: prometheus-sa
-  persistence:
+kube-prometheus-stack:
+  prometheus:
     enabled: true
-  service:
-    type: ClusterIP
+    prometheusSpec:
+      serviceMonitorSelector: {}
+      serviceAccountName: prometheus-sa
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: standard
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 10Gi
+    service:
+      type: ClusterIP
 
 grafana:
   enabled: true
